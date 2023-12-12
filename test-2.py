@@ -13,18 +13,33 @@ WELCOME TO THE GRANN'S PHONE DIRECTORY
 user_choice=int(input("Enter Your Choice:"))
 
 while(user_choice!=6):
-
+#applyin the necessary conditions according to the question
     if(user_choice==1):
         my_name=input("Enter Your Name:")
-        my_num=int(input("Enter Your 10-digit Phone Number:"))
-        if(len(my_num)!= 10):
+        if (my_name.isalpha()):
+            print()
+        else:
+            print("Error, Please enter the string value")
+            my_name=input("Enter Your Name:")
+        my_num=input("Enter Your 10-digit Phone Number:")    
+        if (my_num.isdigit() and len(my_num) == 10):                #if the user add string or more and less number then it will show error else add the record
+            print()
+            
+            if my_name in my_phone_dictionary:
+                update_num = input("Same name already exists. Do you want to update the number? (Y/N):").lower()
+                if update_num == 'Y':
+                    num_new=int(input("Enter Your New Number:"))
+                    print(my_name,"'s number has been updated")
+                else:
+                    print() 
+
+
+        else:
             print("Error,'The number You've entered is not accurate.'")
             my_num=int(input("Enter Your 10-digit Phone Number:"))
-            
-        else:
-            print()
-        my_phone_dictionary[my_name] = my_num
+        my_phone_dictionary[my_name] = my_num 
         print("Your Record Has been Added")
+
 
     elif(user_choice==2):
         search_name=input("Enter the Name You want to search:")
@@ -45,10 +60,10 @@ while(user_choice!=6):
         print("The Sorted Record is:",sorted_dict)
 
     elif(user_choice==5):
-        del_record=input("Enter The Name You Want to Delete:")
+        del_record=input("Enter The Name You Want to Delete:")       #this code will delete the data according to the user input and print the remaining dictionary
         del my_phone_dictionary[my_name]
         print("Your Record has been Deleted.")
-        print("The Remaining Record is:",sorted_dict)
+        print(my_phone_dictionary)
     
     elif(user_choice==5):
         print()
